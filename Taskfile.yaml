@@ -7,6 +7,15 @@ vars:
     sh: if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then echo $(git rev-parse --abbrev-ref HEAD); else echo main ; fi
 
 tasks:
+  render-scm-secret:
+    desc: Render scm secret example
+    cmds:
+      - |
+        machineshop render \
+        --source local \
+        --template templates/git-basicauth-secret.yaml \
+        --values "gitServer=github.com, user=user1, token=bla, repo=https://github.com/stuttgart-things/, name=patrick hermann, email=patrick@test.com, scm=github"
+
   branch:
     desc: Create branch from main
     cmds:
