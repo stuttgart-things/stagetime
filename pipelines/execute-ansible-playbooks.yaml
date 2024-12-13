@@ -1,5 +1,4 @@
 ---
-# Source: tekton-resources/templates/pipelines.yaml
 apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
