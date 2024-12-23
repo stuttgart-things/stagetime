@@ -163,9 +163,10 @@ spec:
         set -eu
 
         if [[ -z "${VARS_FILE}" ]]; then
-          echo "INVENTORY IS EMPTY - MERGING NOTHING!"
+          echo "(EXTRA) VARS FILE IS EMPTY - MERGING NOTHING!"
         else
           echo ${VARS_FILE} | base64 -d > ./to-be-merged.yaml
+          cat ./to-be-merged.yaml
           yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' ./vars.yaml ./to-be-merged.yaml -i
         fi
 

@@ -66,13 +66,13 @@ spec:
   - name: installExtraCollections
     value: "true"
   - name: inventory
-    value: W2luaXRpYWxfbWFzdGVyX25vZGVdCjEwLjMxLjEwMy4zNQoKW2FkZGl0aW9uYWxfbWFzdGVyX25vZGVzXQoxMC4zMS4xMDMuMzMKMTAuMzEuMTAzLjM2Cg==
+    value: W2luaXRpYWxfbWFzdGVyX25vZGVdCjEwLjMxLjEwMy4zNQoKW2FkZGl0aW9uYWxfbWFzdGVyX25vZGVzXQoxMC4zMS4xMDMuMzMKMTAuMzEuMTAzLjM2Cg== #pragma: allowlist secret
   pipelineRef:
     params:
     - name: url
       value: https://github.com/stuttgart-things/stage-time.git
     - name: revision
-      value: main
+      value: "feature/issue-3/update-varsfile-creation"
     - name: pathInRepo
       value: pipelines/execute-ansible-playbooks.yaml
     resolver: git
