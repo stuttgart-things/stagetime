@@ -166,9 +166,13 @@ spec:
           echo "(EXTRA) VARS FILE IS EMPTY - MERGING NOTHING!"
         else
           echo ${VARS_FILE} | base64 -d > ./to-be-merged.yaml
+          echo "TO BE MERGED (FROM B64 VALUE):"
           cat ./to-be-merged.yaml
           yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' ./vars.yaml ./to-be-merged.yaml -i
         fi
+
+        echo "MERGED VARS FILE:"
+        cat ./vars.yaml
 
     - name: install-roles
       args:
