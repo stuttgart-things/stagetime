@@ -65,10 +65,14 @@ spec:
       description: ansible variable for target host/group
       type: string
       default: "all"
+    - name: VARS_FILE
+      description: vars file as b64 (later to be merged with extra vars)
+      type: string
+      default: ""
     - name: WORKING_IMAGE
       description: the image on which ansible will run
       type: string
-      default: "eu.gcr.io/stuttgart-things/sthings-ansible:10.3.0"
+      default: "eu.gcr.io/stuttgart-things/sthings-ansible:11.0.0"
     - name: vault-secret-key-addr
       description: vaul addr key in the secret
       type: string
@@ -150,6 +154,21 @@ spec:
         for argument in "$@"; do echo $argument | sed -e "s/+-/: /g" >> vars.yaml ; done
 
         cat ./vars.yaml
+    - name: merge-vars-file
+      env:
+        - name: VARS_FILE
+          value: $(params.VARS_FILE)
+      script: |
+        #!/usr/bin/env sh
+        set -eu
+
+        if [[ -z "${VARS_FILE}" ]]; then
+          echo "INVENTORY IS EMPTY - MERGING NOTHING!"
+        else
+          echo ${VARS_FILE} | base64 -d > ./to-be-merged.yaml
+          yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' ./vars.yaml ./to-be-merged.yaml -i
+        fi
+
     - name: install-roles
       args:
         - $(params.EXTRA_ROLES[*])

@@ -37,6 +37,10 @@ spec:
       type: array
       default: []
       description: values for ansible inventory
+    - name: varsFiile
+      type: string
+      default: ""
+      description: varsFiile as b64 string (later to be merged with key values)
     - name: ansibleWorkingImage
       type: string
       default: "eu.gcr.io/stuttgart-things/sthings-ansible:11.0.0"
@@ -108,6 +112,8 @@ spec:
           value: $(params.installExtraCollections)
         - name: INVENTORY
           value: $(params.inventory)
+        - name: VARS_FILE
+          value: $(params.varsFiile)
         - name: INVENTORY_VARS
           value: $(params.ansibleVarsInventory[*])
         - name: PLAYBOOKS
