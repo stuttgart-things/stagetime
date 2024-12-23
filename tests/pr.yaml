@@ -3,9 +3,18 @@ kind: PipelineRun
 metadata:
   labels:
     tekton.dev/pipeline: execute-ansible-playbooks
-  name: homerun-int-59qc4-2f520379562d-2
+  name: homerun-int-59qc4-2f520379562d-3
   namespace: tekton-pipelines
 spec:
+  pipelineRef:
+    params:
+    - name: url
+      value: https://github.com/stuttgart-things/stage-time.git
+    - name: revision
+      value: 90bece6bd38efb1f83dbab73db40c8e01a1c85e7 #pragma: allowlist secret
+    - name: pathInRepo
+      value: pipelines/execute-ansible-playbooks.yaml
+    resolver: git
   params:
   - name: ansibleWorkingImage
     value: ghcr.io/stuttgart-things/sthings-ansible:11.0.0
@@ -69,15 +78,6 @@ spec:
     value: "true"
   - name: inventory
     value: W2luaXRpYWxfbWFzdGVyX25vZGVdCjEwLjMxLjEwMy4zNQoKW2FkZGl0aW9uYWxfbWFzdGVyX25vZGVzXQoxMC4zMS4xMDMuMzMKMTAuMzEuMTAzLjM2Cg== #pragma: allowlist secret
-  pipelineRef:
-    params:
-    - name: url
-      value: https://github.com/stuttgart-things/stage-time.git
-    - name: revision
-      value: "feature/issue-3/update-varsfile-creation"
-    - name: pathInRepo
-      value: pipelines/execute-ansible-playbooks.yaml
-    resolver: git
   taskRunTemplate:
     serviceAccountName: default
   timeouts:
