@@ -3,7 +3,7 @@ kind: PipelineRun
 metadata:
   labels:
     tekton.dev/pipeline: execute-ansible-playbooks
-  name: homerun-int-59qc4-2f520379562d-4
+  name: homerun-int-59qc4-2f520379562d-6
   namespace: tekton-pipelines
 spec:
   pipelineRef:
@@ -28,8 +28,8 @@ spec:
     value: /ansible/workdir/
   - name: vaultSecretName
     value: vault
-  - name: varsFile
-    value: bmFtZTogbWFydGluCg== #pragma: allowlist secret
+  # - name: varsFile
+  #   value: bmFtZTogbWFydGluCg== #pragma: allowlist secret
   - name: installExtraRoles
     value: "true"
   - name: ansibleExtraRoles
